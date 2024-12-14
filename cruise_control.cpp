@@ -22,29 +22,37 @@ private:
 
 // Function to simulate getting the current speed of the vehicle
 double getCurrentSpeed() {
-    // This is a stub. Replace with actual speed reading logic.
+    // Replace with actual speed reading logic.
     static double speed = 0;
+    // Example: speed = readSpeedFromSensor();
     return speed;
 }
 
 // Function to simulate setting the throttle of the vehicle
 void setThrottle(double value) {
-    // This is a stub. Replace with actual throttle control logic.
+    // Replace with actual throttle control logic.
     std::cout << "Throttle set to: " << value << std::endl;
+    // Example: setThrottleToVehicle(value);
 }
 
 // Main function to implement cruise control
 int main() {
     PID pid(0.1, 0.01, 0.05); // Initialize PID controller with some constants
     double set_speed = 60.0; // Desired speed in km/h
+    bool running = true; // Flag to control loop execution
 
-    while (true) {
+    while (running) {
         double current_speed = getCurrentSpeed();
         double throttle = pid.calculate(set_speed, current_speed);
         setThrottle(throttle);
 
         // Simulate waiting for a short period before the next control loop iteration
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        // Example condition to exit the loop
+        if (/* condition to stop */) {
+            running = false;
+        }
     }
 
     return 0;
